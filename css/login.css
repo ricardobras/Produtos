@@ -1,0 +1,17 @@
+.login{
+	width: 90%;
+	height: 450px;
+	margin: auto;
+
+}
+.right{
+	display: block;
+	float:right;
+	margin-top:-10px;
+}
+.center{
+	
+	display: block;
+	margin: auto;
+	
+}

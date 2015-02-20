@@ -1,0 +1,135 @@
+body {
+  position: relative !important;
+  font-size:8pt !important;
+  text-transform: uppercase;
+}
+.botao.centralizado{
+	border-radius: 100%;
+	 
+	display: block;
+	width: 55px;
+	height:55px;
+	padding:10px;
+	padding-top:16px;
+	text-align: center;
+	color:#ffffff;
+	box-shadow: 1px 2px 2px 0px  #8B8989;
+	margin:auto;
+	margin-top:10px;
+	cursor:pointer;
+
+}
+ 
+ .botao.direita{
+	border-radius: 100%;
+	font-size: 8pt;
+	display: block;
+	width: 55px;
+	height:55px;
+	padding:10px;
+	padding-top:20px;
+	float:right;
+	text-align: center;
+	color:#ffffff;
+	box-shadow: 1px 2px 2px 0px  #8B8989;
+	margin:auto;
+	margin-top:10px;
+	cursor:pointer;
+
+}
+.botao.direita.red{
+	background-color:#FF4500;
+}
+.botao.direita.red:hover{
+	background-color:#FF7F50;
+}
+.botao.direita.red:active{
+	background-color:#FF3030;
+}
+.botao.centralizado.red{
+	background-color:#FF4500;
+}
+.botao.centralizado.red:hover{
+	background-color:#FF7F50;
+}
+.botao.centralizado.red:active{
+	background-color:#FF3030;
+}
+
+.botao.centralizado.skyblue{
+	background-color:#6CA6CD;
+}
+.botao.centralizado.skyblue:hover{
+	background-color:#7EC0EE;
+}
+.botao.centralizado.skyblue:active{
+	background-color:#1CA3CD;
+}
+
+
+
+
+.info{
+	font-family: verdana;
+}
+
+.info.link{
+	text-align: center;
+	color: #8B8989;
+	font-size: 8pt;
+	font-weight: bold;
+}
+legend{
+	font-size: 8pt;
+}
+.legenda.prioridades{
+ 
+	width: 350px;
+	 
+	position: absolute;
+	float:right;
+	margin-left:65%;
+	margin-right:100px;
+	margin-top:-60px;
+	height: 50px;
+}
+.legenda.prioridades{
+cursor: default;
+
+}
+.legenda.prioridades ul{
+	 clear: both;
+}
+.legenda.prioridades li{
+	font-size: 8pt;
+	display: inline;
+	height: 30px;
+}
+
+input, textarea, button, select, label, option, a{
+	font-size: 8pt !important;
+	text-transform: uppercase;
+}
+
+.loading{
+	position: absolute;
+	 opacity: 0.9;
+     filter: alpha(opacity=90); /* For IE8 and earlier */
+ 
+	width: 100%;
+	height: 100px;
+	background:#ffffff; 
+}
+
+.form-control:invalid{
+	border:2px solid red;
+}
+
+
+.statusCadastro{
+	width: 20px;
+ 	height: 20px;
+ 	cursor: pointer;
+  }
+ 
+  

@@ -1,0 +1,89 @@
+ body, input, button, label{
+ 	font-size: 8pt;
+ 	text-transform: uppercase;
+ 	font-style: ubuntu;
+
+ }
+ 
+
+.input-descricao{
+	min-width: 80% !important;
+	max-width: 100%  ;
+
+}
+
+ .acaoTabela{
+	width: 20px;
+ 	height: 20px;
+  }
+ .acaoTabela span{
+ 	 
+ 	margin-left:-2px;
+
+ }
+
+input{
+	margin-left: 3px;
+	margin-right: 6px;
+	margin-bottom: 4px;
+}
+
+label{
+	font-size: 9pt;
+	margin-right: 1px;
+	margin-top: 5px;
+	text-align: right;
+}
+
+ 
+ 
+ .btn-group{
+ 	margin-right: 5px !important;
+ }
+
+ .loading{
+	position: absolute;
+	 opacity: 0.9;
+     filter: alpha(opacity=90); /* For IE8 and earlier */
+ 
+	width: 100%;
+	height: 100px;
+	background:#ffffff; 
+}
+
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+.page-content{
+    overflow-y: auto;
+    position: fixed;
+    height: 70%;
+    width: 100%;
+}
+
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.glyphicon .green{
+
+color:green;
+}
