@@ -20,10 +20,10 @@ $nomeUsuarioLogado=$_SESSION['UsuarioNome'];
 $emailUsuarioLogado=$_SESSION['UsuarioEmail'];
 $data = date('j/m/y');
 $sqlInsert="INSERT INTO solicitacao (descricao, und, referencia, marca, ccusto, grupo, ordproducao, aplicacao, observacao, importancia, status, usuario_id, empresa_id, usuario_selecao,dt_solicitacao) VALUES (upper('{$descricao}'), upper('{$und}'), upper('{$referencia}'), upper('{$marca_codigo}'), '{$ccusto}', '{$grupo}', '{$ordproducao}', '{$aplicacao}', '{$observacao}', '{$importancia}', '{$status}', '{$usuario_id}', '{$empresa_id}', '{$usuario_selecao}',NOW())"; 
-$arrayJson=[];
+$arrayJson=array();
 
 //sql para exibir os usuarios que realizam cadastro
-$sqlUsuariosCadastro="Select * from usuario where nivelacesso='Cadastro' and ativo='S'";
+$sqlUsuariosCadastro="SELECT * FROM usuario WHERE nivelacesso='Cadastro' AND ativo='S'";
 
 if(mysqli_query($conexao,$sqlInsert)){
 	$resultUsuarioCadastro=mysqli_query($conexao,$sqlUsuariosCadastro);

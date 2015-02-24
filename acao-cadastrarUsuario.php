@@ -1,4 +1,4 @@
-<?php include("/_inc/config.php");
+<?php include("_inc/config.php");
 
 
 $empresa = $_POST['empresa'];
@@ -10,7 +10,7 @@ $login = $_POST['login'];
 $senha = md5($_POST['senha']);
 $nivelAcesso="Solicitante";
 
-$sqlValidarEmail = "Select * from usuario where email='{$email}'";
+$sqlValidarEmail = "SELECT * FROM usuario WHERE email='{$email}'";
 
 $validacao = 0;
 
@@ -31,11 +31,11 @@ if(mysqli_num_rows($resultUsuario) > 0){
 }
  
 if($validacao==0){
-	$sql = "insert into usuario (nome,email,setor,ramal,login,senha,nivelAcesso) values ('{$nome}','{$email}','{$setor}','{$ramal}','{$login}','{$senha}','{$nivelAcesso}')";
+	$sql = "INSERT INTO usuario (nome,email,setor,ramal,login,senha,nivelAcesso) values ('{$nome}','{$email}','{$setor}','{$ramal}','{$login}','{$senha}','{$nivelAcesso}')";
 	mysqli_query($conexao,$sql) or die(mysqli_error());
 
 	$idUsuario = mysqli_insert_id($conexao);
-	$sqlEmpresa = "insert into usuario_empresa (usuario_id,empresa_id) values('{$idUsuario}','$empresa')";
+	$sqlEmpresa = "INSERT INTO usuario_empresa (usuario_id,empresa_id) values('{$idUsuario}','$empresa')";
 	mysqli_query($conexao,$sqlEmpresa) or die(mysqli_error());
 	$response = array("success"=>true);
 

@@ -1,7 +1,6 @@
-<?php 	  
-require_once("DAO-Produto.php"); 
-require_once("Produto.php"); 
-require_once("DAO-Solicitacao.php");
+<?php 	require_once("ProdutoDao.php"); 
+		require_once("Produto.php"); 
+		require_once("SolicitacaoDao.php");
 
 $acao = $_POST['acao'];
 $codigo = $_POST['codigo'];

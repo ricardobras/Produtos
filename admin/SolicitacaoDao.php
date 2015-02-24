@@ -5,7 +5,7 @@ class SolicitacaoDao{
 
 
 	function updateStatus($idsolicitacao,$novoStatus){
-		$sql="update solicitacao set status='{$novoStatus}' where idsolicitacao='{$idsolicitacao}'";
+		$sql="UPDATE solicitacao SET status='{$novoStatus}' WHERE idsolicitacao='{$idsolicitacao}'";
 		$connect = new connectBD();	//cria uma conexão
 		$connect->conectar(); 		//conecta ao bd
 		$connect->set("sql",$sql); 	//define o sql a ser executado

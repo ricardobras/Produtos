@@ -1,7 +1,8 @@
 <?php
-$host="127.0.0.1";
+$host="localhost";
 $user="root";
-$password="cqto11";
 $database="produtos";
-$conexao = mysqli_connect($host, $user, $password, $database);
-?>
+$password="cqto11";
+
+$conexao = mysqli_connect($host, $user, $password, $database) or die ($this->mensagem(mysql_error()));
+ 

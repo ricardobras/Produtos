@@ -7,7 +7,7 @@ $valorBusca = $_POST["busca"];
 
  function executarSql($sql){
  	require_once("../_inc/config.php"); //incluindo conexão do bd
- 	$arrayJson=[];
+ 	$arrayJson=array();
 
 	$resultado = mysqli_query($conexao,$sql);
 
@@ -23,9 +23,9 @@ $valorBusca = $_POST["busca"];
  
 //VERIFICA OS DADOS PASSADOS VIA PARAMETRO POST E REALIZA O FILTRO CASO NECESSÁRIO
 	if($valorBusca=="todos"){
-		$sql1="Select * from ncm";
+		$sql1="SELECT * FROM ncm";
 		echo json_encode(executarSql($sql1));
 	}else{
-		$sql2="Select * from ncm where codigo like ('%{$valorBusca}%') or descricao like ('%{$valorBusca}%');";
+		$sql2="SELECT * FROM ncm WHERE codigo LIKE ('%{$valorBusca}%') OR descricao LIKE ('%{$valorBusca}%');";
 	 	echo json_encode(executarSql($sql2));
 	}

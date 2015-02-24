@@ -1,10 +1,10 @@
 <?php require_once("../_inc/connectBD.php");
  	  require_once("verifica-login-adm.php");
 
-class produtoDetalhesDao{
+class ProdutoDetalhesDao{
 
 	function insert(ProdutoDetalhes $det){
-	$sqlInsert="insert INTO produto_detalhes 
+	$sqlInsert="INSERT INTO produto_detalhes 
 	(empresa_id,produto_codigo,unidCompras,unidConsumo,ccusto,grupo,ordproducao,opentrada) 
 	VALUES ('{$det->get("codEmpresa")}','{$det->get("codProduto")}','{$det->get("unidCompras")}','{$det->get("unidConsumo")}','{$det->get("ccusto")}','{$det->get("grupo")}','{$det->get("ordProducao")}','{$det->get("opEntrada")}') 
 	ON DUPLICATE KEY UPDATE empresa_id = '{$det->get("codEmpresa")}',produto_codigo='{$det->get("codProduto")}',unidCompras='{$det->get("unidCompras")}',
@@ -18,7 +18,7 @@ class produtoDetalhesDao{
 
 	function getProdutoDetalhes($idempresa,$idproduto){
 		$json="";
-		$sql = "SELECT * FROM produto_detalhes where empresa_id='{$idempresa}' and produto_codigo='{$idproduto}'";
+		$sql = "SELECT * FROM produto_detalhes WHERE empresa_id='{$idempresa}' AND produto_codigo='{$idproduto}'";
 		$connect = new connectBD();
 		$connect->conectar();
 		$connect->set("sql",$sql);

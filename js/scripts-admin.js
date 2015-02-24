@@ -1,31 +1,22 @@
-$(function () {
-
-
+$(function() {
 //DESABILITANDO FUNÇÃO DO ENTER
-$('input:text:first').focus();
-
-            var $inp = $('.form-control');
-
-            $inp.bind('keydown', function(e) {
+        $('input:text:first').focus();
+            var inp = $('.form-control');
+            inp.bind('keydown', function(e) {
                 //var key = (e.keyCode ? e.keyCode : e.charCode);
                 var key = e.which;
-
                 if (key == 13) {
-
                     e.preventDefault();
-
                     var nxtIdx = $inp.index(this) + 1;
- 
-                   $(".form-control:eq(" + nxtIdx + ")").focus();
-
-
+                    $(".form-control:eq(" + nxtIdx + ")").focus();
                 }
+         });
 
-            });
+
 
 
       //ação de cadastro
-		  // $('[data-toggle="tooltip"]').tooltip();
+		  //$('[data-toggle="tooltip"]').tooltip();
       //mostrar todas as solicitações em uma tabela e ocultar  a  tabela ao carregar
       //usado para preencher somente o contador
 
@@ -39,7 +30,10 @@ $('input:text:first').focus();
       });
 		  
 
-
+      $("#btPesquisarProduto").on("click",function(ev){
+          $("#modalPesquisaProduto").show();
+          $("#modalPesquisaProduto").modal("show");
+      });
 
       $("#btSalvar").on("click",function(){
 
@@ -74,35 +68,34 @@ function atualizarTabelaAutomaticamente(){
   contarSolicitacoes();
  }
 
-setInterval(function(){atualizarTabelaAutomaticamente()},600000);
+setInterval(function(){atualizarTabelaAutomaticamente();},600000);
 //fim funcao atualiza status
 
-$("#btAtualizar").click(function(){
+$("#btAtualizar").on("click",function(){
   exibirSolicitacoesDoUsuario(0);
   statusSolicitacaoTimeOut=0;
   contarSolicitacoes();
 });
 
-$("#btSolicitacoesPendentes").click(function(){
+$("#btSolicitacoesPendentes").on("click",function(){
   exibirSolicitacoesDoUsuario(0);
   statusSolicitacaoTimeOut=0;
   contarSolicitacoes();
 });
 
-$("#btSolicitacoesEmAndamento").click(function(){
+$("#btSolicitacoesEmAndamento").on("click",function(){
   exibirSolicitacoesDoUsuario(1);
   statusSolicitacaoTimeOut=1;
   contarSolicitacoes();
 });
 
-$("#btSolicitacoesFinalizadas").click(function(){
+$("#btSolicitacoesFinalizadas").on("click",function(){
   exibirSolicitacoesDoUsuario(2);
   statusSolicitacaoTimeOut=2;
   contarSolicitacoes();
-  
 });
 
-$("#btSolicitacoesRecusadas").click(function(){
+$("#btSolicitacoesRecusadas").on("click",function(){
   exibirSolicitacoesDoUsuario(3);
   statusSolicitacaoTimeOut=3;
   contarSolicitacoes();
@@ -113,7 +106,7 @@ $("#btSolicitacoesRecusadas").click(function(){
 
 
 //ação de login
-      $("#formLogin").submit(function(event){
+      $("#formLogin").on("submit",function(event){
         var progressbar = "<img src='../images/progressbar.gif'>";
         event.preventDefault();
 
@@ -134,8 +127,7 @@ $("#btSolicitacoesRecusadas").click(function(){
                     $(".msg").html(texto+progressbar);
                     
             },
-            success: function(msg)
-            {
+            success: function(msg){
            
             if(msg.resposta=="erro"){
                 $(".msg").html("Usuário ou senha Inválidos! tente novamente");
@@ -149,14 +141,13 @@ $("#btSolicitacoesRecusadas").click(function(){
                 $(".msg").removeClass("hide");
                 $(".msg").removeClass("alert-warning");
                 $(".msg").addClass("alert-success");
-                 $(".msg").show();
-             
+                $(".msg").show();
               
                 //redirecionando para a pagina index
                 window.location.assign("index.php");
                }
-             } 
-            });
+            }  
+        });
       });
 
 
@@ -165,8 +156,8 @@ var interval =0;
 $(".campoBusca").keyup(function(){
   //clearInterval(); //faz executar a função somente se parar de digitar por 1,5 s
   var conteudoDoCampoBusca=$(".campoBusca").val();
- showLoading(".msg","Aguarde");
-   clearInterval(interval);
+  showLoading(".msg","Aguarde");
+      clearInterval(interval);
       interval = window.setTimeout(function() {
         exibirSolicitacoesDoUsuario(conteudoDoCampoBusca);
       }, 600);
@@ -175,33 +166,27 @@ $(".campoBusca").keyup(function(){
 $(".campoBusca").focusout(function(){
   //clearInterval(); //faz executar a função somente se parar de digitar por 1,5 s
   var conteudoDoCampoBusca=$(".campoBusca").val();
- showLoading(".msg","Aguarde");
-   clearInterval(interval);
+  showLoading(".msg","Aguarde");
+  clearInterval(interval);
       interval = window.setTimeout(function() {
         exibirSolicitacoesDoUsuario(conteudoDoCampoBusca);
       }, 600);
    });
 
 //AÇÕES DO BOTÃO SALVAR NO MODAL CADASTRO DO PRODUTO
-$("#btSalvarProduto").click(function(ev){
- var retorno = confirm("Deseja realmente Finalizar esse cadastro? ");
- if(retorno==true){
- $("#modalNovoProduto").modal("hide");
-  alterarStatus("statusSolicitacao",$("#codSolicitacao").val(),2);
-  alterarStatus("statusProduto",$("#codigo").val(),1);
-  exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
-  contarSolicitacoes();
-
-}
-else
-{
-  return;
-}
+$("#btSalvarProduto").on("click",function(ev){
+     var retorno = confirm("Deseja realmente Finalizar esse cadastro? ");
+     if(retorno==true){
+         $("#modalNovoProduto").modal("hide");
+         alterarStatus("statusSolicitacao",$("#codSolicitacao").val(),2);
+         alterarStatus("statusProduto",$("#codigo").val(),1);
+         exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
+         contarSolicitacoes();
+    }else{return;}
 });
 
 //LISTAR EMPRESAS DENTRO DO LISTBOX
  
-
          var option="";
            
            $.ajax({
@@ -209,57 +194,43 @@ else
             dataType: 'json',
             url: "../json-empresasUsuario.php",
             success: function(json){
-
                   var option="";
-              
                   $.each(json, function(key, value){
                       option+="<option value='"+value.id+"'>"+value.nome+"</option>";
-                      });
+                  });
                   $('#empresaUsuario').html(option);
-                  }
-               
-               });
-
-
-
-
+                }
+           });
 
 function listarEmpresaPorId(id){
        
        var nome="";
-           $.ajax({
+          $.ajax({
             async:false,
             dataType: 'json',
             url: "../json-empresa.php",
             success: function(json){
-            var idjson = 0;
-              for(var i=0;json[idjson].id != id; i++){
-                idjson=i;
+                var idjson = 0;
+                for(var i=0;json[idjson].id != id; i++){
+                    idjson=i;
+                  }
+                nome=json[idjson].nome+"";
               }
-           
-              nome=json[idjson].nome+"";
-              
-              }
-               });
+          });
        return nome;
-     
 }
 
 function listarTodasEmpresas(){
-       
        var json1="";
            $.ajax({
-            async:false,
-            dataType: 'json',
-            url: "../json-empresa.php",
-            success: function(json){
-       
-              json1=json;
-              
-              }
-               });
+                async:false,
+                dataType: 'json',
+                url: "../json-empresa.php",
+                success: function(json){
+                  json1=json;
+                }
+            });
        return json1;
-     
 }
 
 
@@ -267,31 +238,24 @@ function validarFormulario(form){
 var campovazio=true;
   $(form+" input").each(function(){
       if($(this).val()==""){
-        campovazio=false;
+         campovazio=false;
          $(".msg").removeClass("hide");
          $(".msg").addClass("alert alert-danger");
          $(".msg").html("Por favor, preencha todos os campos do formulario");
          $(".msg").show();
       } 
   });
-
- 
 return campovazio;
 }
 
-
-
-
 function exibirSolicitacoesDoUsuario(status){
- 
-
  
             $.ajax({
                   type: 'POST',
                   dataType: 'json',
                   url: "json-listarSolicitacoesAdm.php",
                   data: "status="+status,//status 0 = Aguardando, 1=Realizando Cadastro, 2=Recusado, 3=Cadastro finalizado,
-                  async: true,
+                  async: false,
                   beforeSend:function(){
                     showLoading(".msg","Aguarde.... Localizando dados da busca.");
                   },
@@ -300,10 +264,8 @@ function exibirSolicitacoesDoUsuario(status){
                     preencherTabela(json);
                   },
                   error: function(msg){
-  
-                      console.log(msg);
+                    console.log(msg);
                   }
-
             }).done(function(){
                   $('[data-toggle="tooltip"]').tooltip();
                   hideLoading(".msg");
@@ -356,20 +318,12 @@ function preencherTabela(json){
                 } else{
                   linhasTable+="<td><div class='btn-group btn-group-addon '><a href='#' class='btn  btn-sm alert-info btEditarSolicitacao ' data-toggle='tooltip' title='Cadastrar' data-placement='left' idSolicitacao='"+valor.idsolicitacao+"'><span class='glyphicon glyphicon-check'></a>";
                 }
-
-               
-             
               }else{
                 if(valor.status==2){
                   linhasTable+="<td><div class='btn-group btn-group-addon '><a href='#' class='btn btn-sm alert-info btEditarSolicitacao'  data-toggle='tooltip' title='Editar' data-placement='left' idSolicitacao='"+valor.idsolicitacao+"'><span class='glyphicon glyphicon-pencil'></a></td>";
-
-                  
-                } 
-
-                if(valor.status==3){
+                } else if(valor.status==3){
                   linhasTable+="<td><a href='#' class='btn btn-sm alert-danger btOcultarSolicitacao' data-toggle='tooltip' title='Ocultar' data-placement='left' idSolicitacao='"+valor.idsolicitacao+"'><span class='glyphicon glyphicon-eye-open'></a></div></td>";
                 }
-                
               }
              linhasTable+="</tr>";
         });
@@ -383,11 +337,9 @@ function preencherTabela(json){
        //  $('[data-toggle="tooltip"]').tooltip();
 }
 
-
 //listar todas as solicitações em aberto no bd
 function listarSolicitacoes(status){
  var result=[];
-
             $.ajax({
                   type: 'POST',
                   dataType: 'json',
@@ -402,12 +354,9 @@ function listarSolicitacoes(status){
                     result=json;
                   },
                   error: function(msg){
-  
                       console.log(msg);
                   }
-
             }).done(function(){
-                
                   hideLoading(".msg");
             });
  return result;
@@ -429,19 +378,14 @@ function filtrarSolicitacao(idFiltro){
                   success: function(json)
                   {
                     result=json;
+                    hideLoading(".msg");
                   },
                   error: function(msg){
   
                       console.log("Erro no metodo: filtrarSolicitacao();");
                   }
-
-            }).done(function(){
-                
-               
             });
-  
-   hideLoading(".msg");
-  
+
   //fazer a varredura no arquivo json para verificar a existencia do id passado via parametro
   return result; //retorna o json com o id correspondente
 }
@@ -453,7 +397,7 @@ function buscarProduto(codigo){
                   type: 'POST',
                   dataType: 'json',
                   url: "acao-Produto.php",
-                  data:"acao=buscarProdutoSolicitacao&idsolicitacao="+codigo+"",
+                  data:"acao=buscar&idsolicitacao="+codigo+"",
                   async: false,
                   beforeSend:function(){
                     showLoading(".msg","Aguarde...");
@@ -463,13 +407,8 @@ function buscarProduto(codigo){
                     result=json;
                   },
                   error: function(msg){
-  
                       console.log("Erro no metodo: filtrarSolicitacao();");
                   }
-
-            }).done(function(){
-                
-               
             });
   
    hideLoading(".msg");
@@ -479,37 +418,30 @@ function buscarProduto(codigo){
 }
 
 function contarSolicitacoesPorStatus(status){
-  
-var contador=0;
-
+   var contador=0;
    contador = listarSolicitacoes(status).length;
    return contador;
 }
 
 function contarSolicitacoes(){
-  $('#contadorSolicitacoesPendentes').html(contarSolicitacoesPorStatus(0));
-  $('#contadorSolicitacoesEmAndamento').html(contarSolicitacoesPorStatus(1));
-  $('#contadorSolicitacoesFinalizadas').html(contarSolicitacoesPorStatus(2));
-  $('#contadorSolicitacoesRecusadas').html(contarSolicitacoesPorStatus(3));
+    $('#contadorSolicitacoesPendentes').html(contarSolicitacoesPorStatus(0));
+    $('#contadorSolicitacoesEmAndamento').html(contarSolicitacoesPorStatus(1));
+    $('#contadorSolicitacoesFinalizadas').html(contarSolicitacoesPorStatus(2));
+    $('#contadorSolicitacoesRecusadas').html(contarSolicitacoesPorStatus(3));
 }
 function preencherFormProdutoPadrao(json){
-
-
-var codigo = $("#codigo");
-var descricao = $("#descricao");
-var complemento1 = $("#complemento1");
-var complemento2 = $("#complemento2");
-var codigoNcm = $("#codigoNcm");
- 
-var grupo = $("#grupo");
-var ccusto = $("#ccusto");
-var ordproducao = $("#ordproducao");
-
-var codigoSolicitacao=0;
+    var codigo = $("#codigo");
+    var descricao = $("#descricao");
+    var complemento1 = $("#complemento1");
+    var complemento2 = $("#complemento2");
+    var codigoNcm = $("#codigoNcm");
+    var grupo = $("#grupo");
+    var ccusto = $("#ccusto");
+    var ordproducao = $("#ordproducao");
+    var codigoSolicitacao=0;
 
        //PERCORRE O JSON RECEBIDO VIA PARAMETRO E PREENCHE O FORM PADRAO
 $.each(json,function(id,produto){
-    console.log(produto);
     codigoSolicitacao=produto.idsolicitacao;
     descricao.val(produto.descricao);
     complemento1.val(produto.complemento1);
@@ -518,57 +450,61 @@ $.each(json,function(id,produto){
     grupo.val(produto.grupo);
     ccusto.val(produto.ccusto);
     ordproducao.val(produto.ordproducao);
-    
-   
 });
 
-   var resultado = $.post( "acao-Produto.php", { acao: "gerarId", idsolicitacao: codigoSolicitacao }).done(function(data){
-             console.log(data);
-             var json = $.parseJSON(data);        //converte em json o objeto recebido
-             var codigoProd = json[0].codigo;     //pega o codigo dentro do array
-                                                  //percorre o array com o novo id gerado e preenche o campo do codigo
-                 codigo.val(codigoProd);          //gera um novo codigo de produto no sistema
-           
-                                                          //calcula o digito verificador atraves do codigo gerado do produto
-      $(".digitoVerificador").html(calcularDv(codigoProd));    //CALCULAR O DV PARA EXIBIR NO ADDON - MODAL
-      $(".digitoVerificador:text").val(calcularDv(codigoProd));//CALCULAR O DV E JOGAR NO INPUT TEXT HIDDEN
+//gera um id e grava na tabela principal de produto, para que nenhum usuario pegue o registro enquanto
+//está sendo digitado por outro.
+$.ajax({
+                  type: 'POST',
+                  dataType: 'json',
+                  url: "acao-Produto.php",
+                  data:"acao=gerarId&idsolicitacao="+codigoSolicitacao+"",
+                  async: true,
+                  beforeSend:function(){
+                    showLoading(".msg","Aguarde...");
+                  },
+                  success: function(json)
+                  {      var codigoProd = json[0].codigo;     // var json = $.parseJSON(data); 
+                         codigo.val(codigoProd);              //converte em json o objeto recebido
+                                                              //pega o codigo dentro do array
+                                                              //percorre o array com o novo id gerado e preenche o campo do codigo
+                                                             //gera um novo codigo de produto no sistema
+                       
+                       //calcula o digito verificador atraves do codigo gerado do produto
+                        $(".digitoVerificador").html(calcularDv(codigoProd));    //CALCULAR O DV PARA EXIBIR NO ADDON - MODAL
+                        $(".digitoVerificador:text").val(calcularDv(codigoProd));//CALCULAR O DV E JOGAR NO INPUT TEXT HIDDEN
 
-   }); 
+                  },
+                  error: function(msg){
+                      console.log("Erro no metodo: filtrarSolicitacao();");
+                  }
+            });
+ 
 }
 
 
 //preenche a tela padrão de cadastro de produto
 //é realizado ao clicar no botão para editar um produto cadastrado
 function preencherFormProdutoPadraoBuscar(produto){
-
- 
-var codigo = $("#codigo");
-var descricao = $("#descricao");
-var complemento1 = $("#complemento1");
-var complemento2 = $("#complemento2");
-var codigoNcm = $("#codigoNcm");
-var tipoProduto = $("#tipoProduto");
-//var grupo = $("#grupo");
-//var ccusto = $("#ccusto");
-//var ordproducao = $("#ordproducao");
-
-
-var codigoSolicitacao=0;
+      var codigo = $("#codigo");
+      var descricao = $("#descricao");
+      var complemento1 = $("#complemento1");
+      var complemento2 = $("#complemento2");
+      var codigoNcm = $("#codigoNcm");
+      var tipoProduto = $("#tipoProduto");
+      var codigoSolicitacao=0;
 
        //PERCORRE O JSON RECEBIDO VIA PARAMETRO E PREENCHE O FORM PADRAO
 
-    descricao.val(produto.descricao);
-    complemento1.val(produto.compl1);
-    complemento2.val(produto.compl2);
-    codigoNcm.val(produto.ncm_codigo);
-     preencherCampoAoDigitarNcm(produto.ncm_codigo);//preenche a descrição do ncm com base no cadastro
-   // grupo.val(produto.grupo);
-   // ccusto.val(produto.ccusto);
-   // ordproducao.val(produto.ordproducao);
-    codigo.val(produto.codigo); 
+      descricao.val(produto.descricao);
+      complemento1.val(produto.compl1);
+      complemento2.val(produto.compl2);
+      codigoNcm.val(produto.ncm_codigo);
+      preencherCampoAoDigitarNcm(produto.ncm_codigo);//preenche a descrição do ncm com base no cadastro
+      codigo.val(produto.codigo); 
     //calcula o digito verificador atraves do codigo gerado do produto
-      $(".digitoVerificador").html(produto.dv);    //CALCULAR O DV PARA EXIBIR NO ADDON - MODAL
-      $(".digitoVerificador:text").val(produto.dv);//CALCULAR O DV E JOGAR NO INPUT TEXT HIDDEN
+      $(".digitoVerificador").html(calcularDv(produto.codigo));    //CALCULAR O DV PARA EXIBIR NO ADDON - MODAL
+      $(".digitoVerificador:text").val(calcularDv(produto.codigo));//CALCULAR O DV E JOGAR NO INPUT TEXT HIDDEN
      
      //selecionar dentro do option o tipo do produto atual no banco dados
       $('#tipoProduto option[value="'+produto.tp_prod+'"]').attr({ selected:"selected" });
@@ -579,17 +515,14 @@ var codigoSolicitacao=0;
 //ativar o click na tabela do modal, ( selecionar a solicitação para criar um novo produto)
 function ativarBotaoCadastrar(ev){
           
-           $(".btCadastrarSolicitacao").click(function(){
+           $(".btCadastrarSolicitacao").on("click",function(){
            var idSol=$(this).attr("idSolicitacao");
 
            var produto =  filtrarSolicitacao(idSol);
 
-            preencherFormProdutoPadrao(produto);
-                                                       //oculta  a tabela após clicar
-             $('#labelDigitoVerificador').html();
-                                                            //mostrao form para cadastrar os dados do novo produto
-              $("#formCadastroDeProduto").slideDown();
-                                                            //criar os botões individuais de cada empresa no form
+              preencherFormProdutoPadrao(produto);     //oculta  a tabela após clicar
+              $('#labelDigitoVerificador').html();     //mostrao form para cadastrar os dados do novo produto
+              $("#formCadastroDeProduto").slideDown(); //criar os botões individuais de cada empresa no form
               criarBotaoIndividualEmpresas();
               $("#modalNovoProduto").modal();
               $("#codSolicitacao").val(idSol);
@@ -599,35 +532,26 @@ function ativarBotaoCadastrar(ev){
 }
  
 function ativarBotaoEditar(){
+  $(".btEditarSolicitacao").on("click",function(){
+        var idSolicitacao=$(this).attr("idSolicitacao");
+        var produto = buscarProduto(idSolicitacao);
 
-  $(".btEditarSolicitacao").click(function(){
-
-    var idSolicitacao=$(this).attr("idSolicitacao");
-    var produto = buscarProduto(idSolicitacao);
-
-    preencherFormProdutoPadraoBuscar(produto);
-    criarBotaoIndividualEmpresas();
-    
-    $("#modalNovoProduto").modal();
-     $("#codSolicitacao").val(idSolicitacao);
+        preencherFormProdutoPadraoBuscar(produto);
+        criarBotaoIndividualEmpresas();
+        
+        $("#modalNovoProduto").modal();
+        $("#codSolicitacao").val(idSolicitacao);
   });
 }
  
- 
 function ativarBotaoDesativarSolicitacao(){
-
-$(".btDesativarSolicitacao").click(function(){
-var id = $(this).attr("idSolicitacao");
-
-confirm("deseja realmente remover essa solicitação?");
-
-});
-
+    $(".btDesativarSolicitacao").on("click",function(){
+          var id = $(this).attr("idSolicitacao");
+          confirm("deseja realmente remover essa solicitação?");
+    });
 }
 
-
-
-$("#botaoExibirEmpresasReplicacao").click(function(){
+$("#botaoExibirEmpresasReplicacao").on("click",function(){
 
           var dadosForm = $("#formCadastroPadraoDeProduto").serialize();
 
@@ -647,9 +571,9 @@ $("#botaoExibirEmpresasReplicacao").click(function(){
                   },
                   error: function(msg){
                     $.each(msg,function(id,val){
-console.log("ERRO:");
-console.log(val);
-                    })
+                      console.log("ERRO:");
+                      console.log(val);
+                    });
                     
                   }
             }).done(function(){
@@ -669,24 +593,20 @@ function buscarDetalhesProdutoExistente(codEmpresa,codProduto)
                   dataType:"json",
                   url:"acao-Produto.php",
                   data:"acao=buscarProdutoDetalhes&codEmpresa="+codEmpresa+"&codProduto="+codProduto,
-                  async: false,
+                  async: true,
                   beforeSend:function(){
                     showLoading(".msg","Aguarde...");
                   },
                   success:function(json)
                   {   
-                    $.each(json,function(id,data){
-                      console.log(data+" log");
-                    });
                       preencherDetalhesProdutoExistente(json); //preencher o produto caso exista
-                    
                   },
                   error: function(msg){
                     $.each(msg,function(id,val){
-console.log("ERRO:");
-console.log(val);
-                    })
-                    
+                        console.log("ERRO:");
+                        console.log(val); });
+                      
+                      hideLoading(".msg");
                   }
             }).done(function(){
                 hideLoading(".msg");
@@ -694,22 +614,21 @@ console.log(val);
 }
 
 function preencherDetalhesProdutoExistente(json){
-$("#codPropdutoDetalhes").val(json.produto_codigo);
-$("#codPropdutoDetalhes").val(json.empresa_id);
-$("#unidComprasDetalhes").val(json.unidCompras);
-$("#unidConsumoDetalhes").val(json.unidConsumo);
-$("#ccusto").val(json.ccusto);
-$("#grupo").val(json.grupo);
-$("#ordproducao").val(json.ordproducao);
-$("#opEntrada").val(json.opentrada);
+      $("#codPropdutoDetalhes").val(json.produto_codigo);
+      $("#codPropdutoDetalhes").val(json.empresa_id);
+      $("#unidComprasDetalhes").val(json.unidCompras);
+      $("#unidConsumoDetalhes").val(json.unidConsumo);
+      $("#ccusto").val(json.ccusto);
+      $("#grupo").val(json.grupo);
+      $("#ordproducao").val(json.ordproducao);
+      $("#opEntrada").val(json.opentrada);
 }
 
  //tela de novo produto ( criar os botões das empresas)
 function criarBotaoIndividualEmpresas(){
     var html="<div class='btn-group'>";
     $.each(listarTodasEmpresas(),function(key,valor){
-      html+="<button type='button' empresa-id="+valor.id+" class='btn btn-info btIndividualEmpresa' nomeEmpresa="+valor.nome+"><span class='glyphicon glyphicon-exclamation-sign'> "+valor.nome+"</button>"
-
+      html+="<button type='button' empresa-id="+valor.id+" class='btn btn-info btIndividualEmpresa' nomeEmpresa="+valor.nome+"><span class='glyphicon glyphicon-exclamation-sign'> "+valor.nome+"</button>";
     });
     html+="</div>";
     $("#botaoIndividualDeEmpresas").html(html);
@@ -720,24 +639,24 @@ $("#botaoExibirEmpresasReplicacao").show();
 
 //abre modal com as informações individuais de cada produto da empresa empresa a ser preenchida
  function acaoBotaoIndividual(){
-    $(".btIndividualEmpresa").click(function(){
+    $(".btIndividualEmpresa").on("click",function(){
         var modal = $("#modalCadastroProdutoDetalhes");
         modal.modal('show');
         modal.find('.modal-title').html("<span class='glyphicon glyphicon-list-alt'></span> Informações Adicionais <i class='text-success'>   ( "+$(this).attr("nomeEmpresa")+" ) <span class='glyphicon glyphicon-menu-down'></span> </i>");
 
-//$("#codigoEmpresa").val($(this).attr("empresa-id"));
-var empresa = $(this).attr("empresa-id");
-var produto = $("#codigo").val();
+        //$("#codigoEmpresa").val($(this).attr("empresa-id"));
+        var empresa = $(this).attr("empresa-id");
+        var produto = $("#codigo").val();
         $("#codEmpresaDetalhes").val(empresa);
         $("#codProdutoDetalhes").val(produto);
         buscarDetalhesProdutoExistente(empresa,produto);
       });
  }
 
-$("#btSalvarDetalhes").click(function(){
+$("#btSalvarDetalhes").on("click",function(){
  var modal = $("#modalCadastroProdutoDetalhes");
  var dadosForm = $("#formProdutoDetalhes").serialize();
-$.ajax({
+        $.ajax({
                   type:"POST",
                   dataType:"json",
                   url:"acao-Produto.php",
@@ -760,19 +679,17 @@ $.ajax({
                     });
                   },
                   error: function(msg){
-                    erro();alert("erro");
+                    erro();
+                    alert("erro");
                   }
-            }).done(function(){
-                  
-                 
             });
 
-var erro = function(){
-     hideLoading(".msg");
-   $(".msg").html("Erro ao cadastrar:\n1- verifique os dados digitados\n 2- Verifique a existência deste cadastro");
-   $(".msg").show();
-}
-});
+                var erro = function(){
+                   hideLoading(".msg");
+                   $(".msg").html("Erro ao cadastrar:\n1- verifique os dados digitados\n 2- Verifique a existência deste cadastro");
+                   $(".msg").show();
+                }
+      });
 
 function alterarIconeBotaoEmpresa(idEmpresa){
   var botao = $(".btIndividualEmpresa[empresa-id="+idEmpresa+"]");
@@ -787,17 +704,16 @@ function removerLinhaTabela(escopo){//função utilizada para apagar uma linha e
       tr.fadeOut(400, function(){ 
           tr.remove(); 
       }); 
-
 }
+
 $("#btBuscarNcm").click(function(){
- var modal=$("#modalNcm");
- modal.modal('show');
- var jsonNcm = buscarNcm("todos");
- preencherTabelaNcm(jsonNcm);
-
- ativarCampoPesquisaNcm();
-
+       var modal=$("#modalNcm");
+       modal.modal('show');
+       var jsonNcm = buscarNcm("todos");
+       preencherTabelaNcm(jsonNcm);
+       ativarCampoPesquisaNcm();
 });
+
 
 //FORMULARIO CAD. PRODUTOS
 //preencher o campo descrição ao digitar algo no campo de ncm
@@ -805,12 +721,7 @@ $('#codigoNcm').on("keyup",function(){
    var valorBusca = $(this).val();
         if(valorBusca==""){return};
         preencherCampoAoDigitarNcm(valorBusca);
-  
-  
  });
-
-
-}); //FIM DA FUNCAO AUTOLOAD DO JQUERY
 
 
 // função usada para preencher o campo descrição de ncm automaticamente ao digitar algo
@@ -834,9 +745,6 @@ function ativarCampoPesquisaNcm(){
     var interval = window.setTimeout(function() {
          preencherTabelaNcm(jsonNcm);
       }, 600);
-       
-      
-
   });
 }
 
@@ -858,10 +766,10 @@ function preencherTabelaNcm(json){
 
 function ativarClickNaLinha(){
   $("table .corpoTabelaNcm>tr").click(function(ev){
-   var codigoNcm=$(this).attr("codigoNcm");
-   var ncmBuscado = buscarNcm(codigoNcm);
-   preencherCamposNcm(ncmBuscado);
-   $('#modalNcm').modal('hide');$('#codigoNcm').focus();
+       var codigoNcm=$(this).attr("codigoNcm");
+       var ncmBuscado = buscarNcm(codigoNcm);
+       preencherCamposNcm(ncmBuscado);
+       $('#modalNcm').modal('hide');$('#codigoNcm').focus();
   });
 }
 
@@ -870,7 +778,6 @@ function ativarClickNaLinha(){
 function preencherCamposNcm(jsonBuscado){
 $.each(jsonBuscado,function(id,val){
          $('#codigoNcm').val(val.codigo);
-
          $('#descricaoNcm').val(val.descricao);
          $('#detUnidCompras').val(val.unidconsumo);
          $('#detUnidConsumo').val(val.unidconsumo);
@@ -889,23 +796,18 @@ function buscarNcm(valorBusca){
                   beforeSend:function(){
                     showLoading(".msg","Aguarde.... Localizando dados da busca.");
                   },
-                  success: function(json)
-                  {
+                  success: function(json){
                     result=json;
                   },
                   error: function(msg){
-  
                       console.log(msg);
                   }
 
             }).done(function(){
-                
                   hideLoading(".msg");
             });
  return result;
 }
-
-
 
 
 //EXIBIR E OCULTAR BARRA DE PROGRESSO COM MENSAGEM
@@ -939,7 +841,7 @@ $.ajax({
                     $.each(msg,function(id,val){
                     console.log("ERRO: aletarStatus");
                     console.log(val);
-                    })
+                    });
                     
                   }
             }).done(function(){
@@ -957,8 +859,7 @@ var cispNum;
 
 if(codigo.length>8){
   return "Erro";
-
-  ;}
+}
 
 cispNum="0000000" + codigo;
 cispNum=cispNum.slice(cispNum.length-8);
@@ -978,3 +879,4 @@ cispDV=cispDig;
 
 return cispDV;
 }
+}); //FIM DA FUNCAO AUTOLOAD DO JQUERY

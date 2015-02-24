@@ -28,14 +28,20 @@
  
 </head>
 	
-<body>
+<body>	
 <div class="page-header">
   <h1>Painel Administrativo -  Cadastros</h1> <small>Gerenciar as opções de cadastros de Produtos de todo o sistema, Adicionar, Alterar, Excluir etc..</small>
  
   <nav class="navbar navbar-default">
   <div class="container-fluid">
-  		<div class="navbar-btn  pull-right">
+  		<div class="navbar-btn pull-right">
+  			<button id="btPesquisarProduto" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Pesquisar Produtos Cadastrados" data-placement="bottom">
+					 <span class="glyphicon glyphicon-file"></span>
+					  <span class="glyphicon glyphicon-search"></span>
+				</button>
   		<div class="btn-group">
+
+  	
   			<button class="btn btn-sm btn-success" id="btAtualizar" type="button" data-toggle="tooltip" data-placement="bottom" title="Atualizar">
 					  <span class="glyphicon glyphicon-refresh"></span>
 			</button>

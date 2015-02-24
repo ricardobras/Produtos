@@ -1,12 +1,12 @@
-<?php include("_inc/config.php");
+<?php require_once("_inc/config.php");
 	  require_once("verifica-login.php");
 
-$sql = "Select * from empresa";
+$sql = "SELECT * FROM empresa";
 
 $resultado = mysqli_query($conexao,$sql);
 
 
-$arrayJson=[];
+$arrayJson=array();
 if(mysqli_num_rows($resultado)>0){
 
 	while($empresa = mysqli_fetch_assoc($resultado)){
