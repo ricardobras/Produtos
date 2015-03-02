@@ -2,7 +2,7 @@
 	  require_once("json/produto.php");
 
 //criar a instancia do servidor
-$server = new SoapServer(null, array('uri'=>'http://localhost/produtos/soap'));
+$server = new SoapServer(null, array('uri'=>$var_url_soap_server));
 
 //definicao do serviço
 function getProdutos($empresa){

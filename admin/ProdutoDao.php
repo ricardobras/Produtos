@@ -8,7 +8,7 @@ function insert($produto){
  $connect = new connectBD();
  $connect->conectar();
  
- $sqlInsert = "insert INTO produto(descricao,compl1,compl2,princ_ativo,tp_prod,bloqueado,citricidade,user_cadastro,user_val,user_int,ncm_codigo,marca_codigo,idsolicitacaoweb,status,dt_cadastro)  VALUES ('{$produto->getDescricao()}','{$produto->getCompl1()}','{$produto->getCompl2()}','{$produto->getPrinc_ativo()}', 	'{$produto->getTp_prod()}','{$produto->getBloqueado()}','{$produto->getCitricidade()}','{$produto->getUserCadastro()}','{$produto->getUserVal()}', 	'{$produto->getUserInt()}','{$produto->getCodNcm()}','{$produto->getCodMarca()}','{$produto->getIdSolicitacaoWeb()}','{$produto->getStatus()}','{$produto->getDtCadastro()}');";	
+ $sqlInsert = "INSERT INTO produto(descricao,compl1,compl2,princ_ativo,tp_prod,bloqueado,citricidade,user_cadastro,user_val,user_int,ncm_codigo,marca_codigo,idsolicitacaoweb,status,dt_cadastro)  VALUES ('{$produto->getDescricao()}','{$produto->getCompl1()}','{$produto->getCompl2()}','{$produto->getPrinc_ativo()}', 	'{$produto->getTp_prod()}','{$produto->getBloqueado()}','{$produto->getCitricidade()}','{$produto->getUserCadastro()}','{$produto->getUserVal()}', 	'{$produto->getUserInt()}','{$produto->getCodNcm()}','{$produto->getCodMarca()}','{$produto->getIdSolicitacaoWeb()}','{$produto->getStatus()}','{$produto->getDtCadastro()}');";	
  $connect->set("sql",$sqlInsert);
 
 	if($connect->execute()){ //se a execução for correta, ele continua e retorna o codigo do novo registro
@@ -30,7 +30,7 @@ function buscarPorSolicitacao($id){
 	$connect = new connectBD();//pega a classe de conexao
 	$connect->conectar();//conecta ao bd
 
-	$sql = "Select * from produto where idsolicitacaoweb='{$id}';"; //sql de pesquisa
+	$sql = "SELECT * FROM produto WHERE idsolicitacaoweb='{$id}';"; //sql de pesquisa
 	
 	$connect->set("sql",$sql); //passa o sql como parametro para execute a pesquisa
 	$result=$connect->execute(); //executa o sql na base de dados
@@ -43,8 +43,6 @@ function buscarPorSolicitacao($id){
 		$prod='{"codigo":0}';
 		$json = $prod;
 	}
-
-
 		return $json;
  
 }
@@ -54,7 +52,7 @@ function buscarPorCodigo($id){
 	$connect = new connectBD();
 	$connect->conectar();
 
-	$sql = "Select * from produto where codigo='{$id}';";
+	$sql = "SELECT * FROM produto WHERE codigo='{$id}';";
 	
 	$connect->set("sql",$sql);
 	$result=$connect->execute();
@@ -65,15 +63,36 @@ function buscarPorCodigo($id){
 		$prod='{"codigo":0}';
 		$json = $prod;
 	}
+		return $json;
+ 
+}
 
 
+function buscar($val){
+	$connect = new connectBD();
+	$connect->conectar();
+
+	$sql = "SELECT * FROM produto WHERE codigo='{$val}' OR descricao like '%{$val}%';";
+	
+	$connect->set("sql",$sql);
+	$result=$connect->execute();
+	$json=array();
+	if(mysqli_num_rows($result)>0){
+		while($linha = mysqli_fetch_assoc($result)){
+			array_push($json, $linha);
+		}
+		return json_encode($json);
+	}else{
+		$prod='{"codigo":0}';
+		$json = $prod;
+	}
 		return $json;
  
 }
 
 function update(Produto $produto){
 $connect2 = new connectBD();
-$sqlUpdate2 = "update produto SET dv='{$produto->getDv()}', 
+$sqlUpdate2 = "UPDATE produto SET dv='{$produto->getDv()}', 
 descricao = '{$produto->getDescricao()}', 
 compl1 = '{$produto->getCompl1()}', 
 compl2 = '{$produto->getCompl2()}', 
@@ -98,7 +117,7 @@ return $connect2->execute();
 
 function updateStatus(Produto $produto){
 	$connect = new connectBD();
-	$sqlUpdate = "update produto set status='{$produto->getStatus()}' where codigo='{$produto->getCodigo()}';";
+	$sqlUpdate = "UPDATE produto SET status='{$produto->getStatus()}' WHERE codigo='{$produto->getCodigo()}';";
 	$connect->conectar();
 	$connect->set("sql",$sqlUpdate);
 return $connect->execute();

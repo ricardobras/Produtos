@@ -6,11 +6,11 @@ $usuarioID=$_SESSION['UsuarioId'];
 $valorBusca=$_POST['campoBusca'];
 
 if($modoExibicao=="todas"){
-	$jsonSolicitacao=[];
+	$jsonSolicitacao=array();
 //listar todas as solicitações vinculadas aquele usuário
 	  
 		
-		$sqlSelect = "Select * from solicitacao where usuario_id='{$usuarioID}' and status in(0,1) order by status asc, importancia desc,dt_solicitacao asc";
+		$sqlSelect = "SELECT * FROM solicitacao WHERE usuario_id='{$usuarioID}' AND status IN(0,1) ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
 
 		$resultado=mysqli_query($conexao,$sqlSelect);
 
@@ -23,11 +23,11 @@ if($modoExibicao=="todas"){
 
 		}
 }else if($modoExibicao=="busca"  && $valorBusca!=""){
-$jsonSolicitacao=[];
+$jsonSolicitacao=array();
 
 //listar todas as solicitações vinculadas aquele usuário
 
-		$sqlSelectBusca = "Select * from solicitacao where usuario_id='{$usuarioID}'  order by status asc, importancia desc,dt_solicitacao asc";
+		$sqlSelectBusca = "SELECT * FROM solicitacao WHERE usuario_id='{$usuarioID}'  ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
 
 		$resultadoBusca=mysqli_query($conexao,$sqlSelectBusca);
 

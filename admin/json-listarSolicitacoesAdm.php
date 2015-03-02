@@ -6,7 +6,7 @@ $usuarioID=$_SESSION['UsuarioId'];
  
 $status=$_POST['status'];
  
-	$jsonSolicitacao=[];
+	$jsonSolicitacao=array();
 
 
 
@@ -14,7 +14,7 @@ $status=$_POST['status'];
 //listar todas as solicitações vinculadas aquele usuário
 	if($status=="todos"){
 		$idSolicitacao = $_POST['id'];
-		$sqlSelect = "Select * from solicitacao where idsolicitacao='{$idSolicitacao}'  order by status asc, importancia desc,dt_solicitacao asc";
+		$sqlSelect = "SELECT * FROM solicitacao WHERE idsolicitacao='{$idSolicitacao}'  ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
 
 		$resultado=mysqli_query($conexao,$sqlSelect);
 
@@ -24,7 +24,7 @@ $status=$_POST['status'];
 			}
 		}
 	}else{
-		$sqlSelect = "Select * from solicitacao where status='{$status}'  order by status asc, importancia desc,dt_solicitacao asc";
+		$sqlSelect = "SELECT * FROM solicitacao WHERE status='{$status}'  ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
 
 		$resultado=mysqli_query($conexao,$sqlSelect);
 
