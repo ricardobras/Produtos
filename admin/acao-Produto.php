@@ -1,9 +1,5 @@
 <?php date_default_timezone_set('America/Sao_Paulo');
-<<<<<<< HEAD
-require_once("Produto.php"); //INCLUINDO AS DEPENDENCIAS
-=======
 require_once("./Produto.php"); //INCLUINDO AS DEPENDENCIAS
->>>>>>> origin/master
 	  require_once("ProdutoDao.php"); 
  	  require_once("SolicitacaoDao.php");
  	  require_once("ProdutoDetalhes.php"); 
@@ -23,10 +19,6 @@ $arrayJson=array();
 $usuarioCadastro = $_SESSION['UsuarioId']; 	
 
 if($acao=="gerarId"){
-<<<<<<< HEAD
-	date_default_timezone_set('America/Sao_Paulo');
-=======
->>>>>>> origin/master
 	$daoProduto = new ProdutoDao();
 	$daoSolicitacao = new SolicitacaoDao();
 	//PEGA O NOME DO USUÁRIO LOGADO VIA SESSION
@@ -140,10 +132,6 @@ $daoSolicitacao = new SolicitacaoDao();
 }else if($acao=="localizarProduto"){
 	$valorBusca=$_POST['valorBusca'];
 	$daoProduto = new ProdutoDao();
-<<<<<<< HEAD
 	$json= $daoProduto->buscar($valorBusca);
 	echo $json;
-=======
-	echo  $daoProduto->buscar($valorBusca);
->>>>>>> origin/master
 }

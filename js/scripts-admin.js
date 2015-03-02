@@ -7,11 +7,7 @@ $(function() {
                 var key = e.which;
                 if (key == 13) {
                     e.preventDefault();
-<<<<<<< HEAD
                     var nxtIdx = inp.index(this) + 1;
-=======
-                    var nxtIdx = $inp.index(this) + 1;
->>>>>>> origin/master
                     $(".form-control:eq(" + nxtIdx + ")").focus();
                 }
          });
@@ -35,11 +31,7 @@ $(function() {
 		  
 
       $("#btPesquisarProduto").on("click",function(ev){
-<<<<<<< HEAD
    
-=======
-          $("#modalPesquisaProduto").show();
->>>>>>> origin/master
           $("#modalPesquisaProduto").modal("show");
       });
 
@@ -197,7 +189,6 @@ $("#btSalvarProduto").on("click",function(ev){
 $("#btnModalPesquisarProduto").on("click",function(){
   var tabela=$("#corpoTabelaPesquisaProduto");
  
-<<<<<<< HEAD
    $.ajax({
                   type: 'POST',
                   dataType: 'json',
@@ -233,8 +224,6 @@ $("#btnModalPesquisarProduto").on("click",function(){
 });
 //LISTAR EMPRESAS DENTRO DO LISTBOX
  
-=======
->>>>>>> origin/master
          var option="";
            
            $.ajax({

@@ -11,7 +11,6 @@
         <div class="input-group">
               <input class="form-control" type="text" id="campoPesquisaProduto" placeholder="informe código ou descrição">
               <div class="input-group-btn"> 
-<<<<<<< HEAD
               <button class="btn btn-default" id="btnModalPesquisarProduto"> pesquisar</button>
                 
               </div>
@@ -27,12 +26,6 @@
             
           </tbody>
         </table>
-=======
-              <button class="btn btn-default"> pesquisar</button>
-                
-              </div>
-        </div>
->>>>>>> origin/master
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
