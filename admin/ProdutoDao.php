@@ -66,22 +66,38 @@ function buscarPorCodigo($id){
 		return $json;
  
 }
+<<<<<<< HEAD:admin/ProdutoDao.php
 
+=======
+>>>>>>> origin/master:admin/ProdutoDao.php
 
 function buscar($val){
 	$connect = new connectBD();
 	$connect->conectar();
 
+<<<<<<< HEAD:admin/ProdutoDao.php
+=======
+function buscar($val){
+	$connect = new connectBD();
+	$connect->conectar();
+
+>>>>>>> origin/master:admin/ProdutoDao.php
 	$sql = "SELECT * FROM produto WHERE codigo='{$val}' OR descricao like '%{$val}%';";
 	
 	$connect->set("sql",$sql);
 	$result=$connect->execute();
+<<<<<<< HEAD:admin/ProdutoDao.php
 	$json=array();
 	if(mysqli_num_rows($result)>0){
 		while($linha = mysqli_fetch_assoc($result)){
 			array_push($json, $linha);
 		}
 		return json_encode($json);
+=======
+	if(mysqli_num_rows($result)>0){
+		$prod = mysqli_fetch_assoc($result);
+		$json = json_encode($prod);
+>>>>>>> origin/master:admin/ProdutoDao.php
 	}else{
 		$prod='{"codigo":0}';
 		$json = $prod;

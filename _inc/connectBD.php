@@ -1,8 +1,20 @@
 <?php 
 class connectBD {
+<<<<<<< HEAD
 
 
    private $sql; 
+=======
+   /*
+   * Declaração dos atributos da classe de conexão
+   */
+ 
+   private $host="localhost"; // Endereço do servidor do banco de dados
+   private $bd="produtos"; // Banco de dados utilizado na conexão
+   private $usuario="root"; // Usuário do banco de dados que possua acesso ao schema
+   private $senha="cqto11"; // Senha do usuário
+   private $sql; // Consulta a ser executada
+>>>>>>> origin/master
    private $conexao;
 
   function conectar(){
