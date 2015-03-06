@@ -70,10 +70,11 @@ function atualizarTabelaAutomaticamente(){
 
 setInterval(function(){atualizarTabelaAutomaticamente();},600000);
 //fim funcao atualiza status
+$(".tituloPainel").html("<b class='alert alert-warning'>SOLICITAÇÕES: PENDENTES</b>");
 
 $("#btAtualizar").on("click",function(){
-  exibirSolicitacoesDoUsuario(0);
-  statusSolicitacaoTimeOut=0;
+  exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
+   
   contarSolicitacoes();
 });
 
@@ -81,24 +82,29 @@ $("#btSolicitacoesPendentes").on("click",function(){
   exibirSolicitacoesDoUsuario(0);
   statusSolicitacaoTimeOut=0;
   contarSolicitacoes();
+  $(".tituloPainel").html("<b class='alert alert-warning'>SOLICITAÇÕES: PENDENTES</b>");
 });
 
 $("#btSolicitacoesEmAndamento").on("click",function(){
   exibirSolicitacoesDoUsuario(1);
   statusSolicitacaoTimeOut=1;
   contarSolicitacoes();
+  $(".tituloPainel").html("<b class='alert alert-info'>SOLICITAÇÕES: EM ANDAMENTO</b>");
 });
 
 $("#btSolicitacoesFinalizadas").on("click",function(){
   exibirSolicitacoesDoUsuario(2);
   statusSolicitacaoTimeOut=2;
   contarSolicitacoes();
+  $(".tituloPainel").html("<b class='alert alert-success'>SOLICITAÇÕES: FINALIZADAS</b>");
+  
 });
 
 $("#btSolicitacoesRecusadas").on("click",function(){
   exibirSolicitacoesDoUsuario(3);
   statusSolicitacaoTimeOut=3;
   contarSolicitacoes();
+  $(".tituloPainel").html("<b class='alert alert-danger'>SOLICITAÇÕES: RECUSADAS</b>");
 });
 
 
@@ -178,15 +184,17 @@ $("#btSalvarProduto").on("click",function(ev){
      var retorno = confirm("Deseja realmente Finalizar esse cadastro? ");
      if(retorno==true){
          $("#modalNovoProduto").modal("hide");
+         atualizarDadosDoProduto();
          alterarStatus("statusSolicitacao",$("#codSolicitacao").val(),2);
          alterarStatus("statusProduto",$("#codigo").val(),1);
+
          exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
          contarSolicitacoes();
     }else{return;}
 });
 
 //AÇÕES BOTÃO PESQUISAR PRODUTO
-$("#btnModalPesquisarProduto").on("click",function(){
+$("#campoPesquisaProduto").on("keyup",function(){
   var tabela=$("#corpoTabelaPesquisaProduto");
  
    $.ajax({
@@ -213,6 +221,7 @@ $("#btnModalPesquisarProduto").on("click",function(){
                     });
 
                      tabela.html(html);
+                     hideLoading(".msg");
                   },
                   error: function(msg){
                       console.log("Erro no metodo: filtrarSolicitacao();");
@@ -350,6 +359,7 @@ function preencherTabela(json){
              if(valor.status==0 | valor.status==1){
              
                 if(valor.status==0){
+
                   linhasTable+="<td><div class='btn-group btn-group-addon '><a href='#' class='btn  btn-sm alert-info btCadastrarSolicitacao  ' data-toggle='tooltip' title='Cadastrar' data-placement='left' idSolicitacao='"+valor.idsolicitacao+"'><span class='glyphicon glyphicon-check'></a>";
                   linhasTable+="<a href='#' class='btn  btn-sm alert-danger btDesativarSolicitacao ' data-toggle='tooltip' title='Recusar' data-placement='left' idSolicitacao='"+valor.idsolicitacao+"'><span class='glyphicon glyphicon-thumbs-down'></a></div></td>";
                 } else{
@@ -446,9 +456,9 @@ function buscarProduto(codigo){
                   error: function(msg){
                       console.log("Erro no metodo: filtrarSolicitacao();");
                   }
-            });
+            }).done(function(){ hideLoading(".msg")});
   
-   hideLoading(".msg");
+ 
   
   //fazer a varredura no arquivo json para verificar a existencia do id passado via parametro
   return result; //retorna o json com o id correspondente
@@ -589,10 +599,12 @@ function ativarBotaoDesativarSolicitacao(){
 }
 
 $("#botaoExibirEmpresasReplicacao").on("click",function(){
+          atualizarDadosDoProduto();
+});
 
-          var dadosForm = $("#formCadastroPadraoDeProduto").serialize();
-
-          $.ajax({
+function atualizarDadosDoProduto(){
+   var dadosForm = $("#formCadastroPadraoDeProduto").serialize();
+  $.ajax({
                   type:"POST",
                   dataType:"json",
                   url:"acao-Produto.php",
@@ -616,11 +628,7 @@ $("#botaoExibirEmpresasReplicacao").on("click",function(){
             }).done(function(){
                 hideLoading(".msg");
             });
-  
-
-
-     
-});
+}
 
 //buscar os detalhes do produto caso ele exista
 function buscarDetalhesProdutoExistente(codEmpresa,codProduto)
@@ -653,8 +661,8 @@ function buscarDetalhesProdutoExistente(codEmpresa,codProduto)
 function preencherDetalhesProdutoExistente(json){
       $("#codPropdutoDetalhes").val(json.produto_codigo);
       $("#codPropdutoDetalhes").val(json.empresa_id);
-      $("#unidComprasDetalhes").val(json.unidCompras);
-      $("#unidConsumoDetalhes").val(json.unidConsumo);
+      $("#detUnidCompras").val(json.unidCompras);
+      $("#detUnidConsumo").val(json.unidConsumo);
       $("#ccusto").val(json.ccusto);
       $("#grupo").val(json.grupo);
       $("#ordproducao").val(json.ordproducao);

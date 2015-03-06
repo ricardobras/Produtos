@@ -85,7 +85,7 @@ function listarEmpresaPorId(id){
        
        var nome="";
            $.ajax({
-            async:true,
+            async:false,
             dataType: 'json',
             url: "json-empresa.php",
             success: function(json){

@@ -8,7 +8,7 @@ class ProdutoDetalhesDao{
 	(empresa_id,produto_codigo,unidCompras,unidConsumo,ccusto,grupo,ordproducao,opentrada) 
 	VALUES ('{$det->get("codEmpresa")}','{$det->get("codProduto")}','{$det->get("unidCompras")}','{$det->get("unidConsumo")}','{$det->get("ccusto")}','{$det->get("grupo")}','{$det->get("ordProducao")}','{$det->get("opEntrada")}') 
 	ON DUPLICATE KEY UPDATE empresa_id = '{$det->get("codEmpresa")}',produto_codigo='{$det->get("codProduto")}',unidCompras='{$det->get("unidCompras")}',
-	unidConsumo='{$det->get("unidConsumo")}',ccusto='{$det->get("ccusto")}',grupo='{$det->get("grupo")}',ordproducao='{$det->get("ordProducao")}',opentrada='{$det->get("opEntrada")}'";
+	unidConsumo='{$det->get("unidConsumo")}',ccusto='{$det->get("ccusto")}',grupo='{$det->get("grupo")}',ordproducao='{$det->get("ordProducao")}',opentrada='{$det->get("opEntrada")}', sincronizado='N'";
 	$connect = new connectBD();
 	$connect->conectar();
 	$connect->set("sql",$sqlInsert);

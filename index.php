@@ -1,6 +1,9 @@
 
 <?php require_once("cabecalho.php") ?>
- 
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Solicitações de Cadastro</div>
+
 <div class="msg loading  hide"></div>
  
 		<table class="table table-stripped table-responsive table-condensed table-hover" >
@@ -27,8 +30,8 @@
 
 			</tbody>
 		</table>
- 
-
+ </div>
+</div>
 
 
 

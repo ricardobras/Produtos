@@ -1,4 +1,3 @@
-
 <!-- Modal cadastro de usuario -->
 <div class="modal fade" id="modalPesquisaProduto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -8,14 +7,16 @@
         <h4 class="modal-title" id="myModalLabel">Pesquisar Produtos</h4>
       </div>
       <div class="modal-body">
+
         <div class="input-group">
               <input class="form-control" type="text" id="campoPesquisaProduto" placeholder="informe código ou descrição">
               <div class="input-group-btn"> 
               <button class="btn btn-default" id="btnModalPesquisarProduto"> pesquisar</button>
                 
               </div>
+              
         </div>
-
+<div class="msg"></div>
         <table class="table table-stripped table-condensed table-hover">
           <thead>
             <tr>

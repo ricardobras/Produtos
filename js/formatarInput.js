@@ -12,6 +12,6 @@ $(function(){
  	$(".ccusto").inputmask({"mask": "9", "repeat": 10, "greedy": false});
 	$("#ccusto").inputmask({"mask": "9", "repeat": 10, "greedy": false});
  	
- 
+ 	$("#opEntrada").inputmask({"mask": "9", "repeat": 10, "greedy": false});
 
 });
