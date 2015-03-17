@@ -1,17 +1,5 @@
 $(function() {
 //DESABILITANDO FUNÇÃO DO ENTER
-        $('input:text:first').focus();
-            var inp = $('.form-control');
-            inp.bind('keydown', function(e) {
-                //var key = (e.keyCode ? e.keyCode : e.charCode);
-                var key = e.which;
-                if (key == 13) {
-                    e.preventDefault();
-                    var nxtIdx = inp.index(this) + 1;
-                    $(".form-control:eq(" + nxtIdx + ")").focus();
-                }
-         });
-
 
 
 
@@ -22,7 +10,8 @@ $(function() {
 
       
      exibirSolicitacoesDoUsuario(0);
-     contarSolicitacoes();//coloca dentro dos botões no cabeçalho, o numero de solicitações em cada status
+
+    
 
       hideLoading(".msg");
       $(".btCancelar").on("click",function(){
@@ -59,52 +48,53 @@ $(function() {
       });
 
 
+
 var statusSolicitacaoTimeOut=0; //usado para definir qual status o usuario selecionou, para
                                 //atualizar automaticamente e permanecer na mesma tela
                                 //função para atualizar o status da pagina atual
 
 function atualizarTabelaAutomaticamente(){
   exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
-  contarSolicitacoes();
+
  }
 
 setInterval(function(){atualizarTabelaAutomaticamente();},600000);
 //fim funcao atualiza status
-$(".tituloPainel").html("<b class='alert alert-warning'>SOLICITAÇÕES: PENDENTES</b>");
+$(".tituloPainel").html("<h5><span class='label label-warning'>SOLICITAÇÕES: PENDENTES</span></h5>");
 
 $("#btAtualizar").on("click",function(){
   exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
    
-  contarSolicitacoes();
+ 
 });
 
 $("#btSolicitacoesPendentes").on("click",function(){
   exibirSolicitacoesDoUsuario(0);
   statusSolicitacaoTimeOut=0;
-  contarSolicitacoes();
-  $(".tituloPainel").html("<b class='alert alert-warning'>SOLICITAÇÕES: PENDENTES</b>");
+ 
+  $(".tituloPainel").html("<h5><span class='label label-warning'>SOLICITAÇÕES: PENDENTES</span></h5>");
 });
 
 $("#btSolicitacoesEmAndamento").on("click",function(){
   exibirSolicitacoesDoUsuario(1);
   statusSolicitacaoTimeOut=1;
-  contarSolicitacoes();
-  $(".tituloPainel").html("<b class='alert alert-info'>SOLICITAÇÕES: EM ANDAMENTO</b>");
+
+  $(".tituloPainel").html("<h5><span class='label label-info'>SOLICITAÇÕES: EM ANDAMENTO</b></h5>");
 });
 
 $("#btSolicitacoesFinalizadas").on("click",function(){
   exibirSolicitacoesDoUsuario(2);
   statusSolicitacaoTimeOut=2;
-  contarSolicitacoes();
-  $(".tituloPainel").html("<b class='alert alert-success'>SOLICITAÇÕES: FINALIZADAS</b>");
+ 
+  $(".tituloPainel").html("<h5><span class='label label-success'>SOLICITAÇÕES: FINALIZADAS</b></h5>");
   
 });
 
 $("#btSolicitacoesRecusadas").on("click",function(){
   exibirSolicitacoesDoUsuario(3);
   statusSolicitacaoTimeOut=3;
-  contarSolicitacoes();
-  $(".tituloPainel").html("<b class='alert alert-danger'>SOLICITAÇÕES: RECUSADAS</b>");
+ 
+  $(".tituloPainel").html("<h5><span class='label label-default'>SOLICITAÇÕES: RECUSADAS</span></h5>");
 });
 
 
@@ -189,7 +179,7 @@ $("#btSalvarProduto").on("click",function(ev){
          alterarStatus("statusProduto",$("#codigo").val(),1);
 
          exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
-         contarSolicitacoes();
+
     }else{return;}
 });
 
@@ -266,6 +256,21 @@ function listarEmpresaPorId(id){
        return nome;
 }
 
+
+function listarUsuarioPorId(id){
+       
+       var jsonReturn="";
+          $.ajax({
+            async:false,
+            dataType: 'json',
+            url: "json-buscarUsuario.php?usuarioId="+id,
+            success: function(json){
+           
+                jsonReturn=json[0];
+              }
+          });
+       return jsonReturn;
+}
 function listarTodasEmpresas(){
        var json1="";
            $.ajax({
@@ -301,7 +306,7 @@ function exibirSolicitacoesDoUsuario(status){
                   dataType: 'json',
                   url: "json-listarSolicitacoesAdm.php",
                   data: "status="+status,//status 0 = Aguardando, 1=Realizando Cadastro, 2=Recusado, 3=Cadastro finalizado,
-                  async: false,
+                  async: true,
                   beforeSend:function(){
                     showLoading(".msg","Aguarde.... Localizando dados da busca.");
                   },
@@ -314,17 +319,22 @@ function exibirSolicitacoesDoUsuario(status){
                   }
             }).done(function(){
                   $('[data-toggle="tooltip"]').tooltip();
-                  hideLoading(".msg");
+                 // hideLoading(".msg");
+
+                 //após preencher a tabela, realiza a contagem de todas as solicitações
+            
             }); 
+           
 }
 
 
 function preencherTabela(json){
-  
+ //  showLoading(".msg","Aguarde.... Localizando dados da busca.");
   var linhasTable="";
-  var contadorSolicitacoes=0;
+  //var contadorSolicitacoes=0;
+  $(".corpoTabela").html(linhasTable);
   $.each(json,function(key,valor){
-            contadorSolicitacoes+=1;
+           // contadorSolicitacoes+=1;
             //pintando a linha da tabela de acordo com a sua importancia
 
              if(valor.importancia==0){
@@ -343,10 +353,13 @@ function preencherTabela(json){
 
             
              var data=moment(valor.dt_solicitacao).format('DD/MM/YYYY hh:mm');
-             var nomeEmpresa=listarEmpresaPorId(valor.empresa_id);
-
+           //  var nomeEmpresa=listarEmpresaPorId(valor.empresa_id);
+             //var jsonSolicitante=listarUsuarioPorId(valor.usuario_id);
+             
+             linhasTable+= "<td><span class='glyphicon glyphicon-user' data-toggle='tooltip' title='"+valor.nomeSolicitante+"' data-placement='right'></span></td>";
              linhasTable+= "<td>"+data+"</td>";
-             linhasTable+= "<td>"+nomeEmpresa+"</td>";
+             linhasTable+= "<td>"+valor.codigo+"</td>";
+             linhasTable+= "<td>"+valor.nomeEmpresa+"</td>";
              linhasTable+= "<td>"+valor.descricao+"</td>";
              linhasTable+= "<td>"+valor.und+"</td>";
              linhasTable+="<td>"+valor.referencia+"</td>";
@@ -373,32 +386,53 @@ function preencherTabela(json){
                 }
               }
              linhasTable+="</tr>";
+        
         });
-         $(".corpoTabela").html(linhasTable);
-         $("#tabelaCadastroDeProduto").fadeIn();
-         $("#formCadastroDeProduto").hide();
-         $("#contadorSolicitacoes").html(contadorSolicitacoes);
+
+        $(".corpoTabela").html(linhasTable);
          ativarBotaoCadastrar();
          ativarBotaoEditar();
          ativarBotaoDesativarSolicitacao();
-       //  $('[data-toggle="tooltip"]').tooltip();
+         ativarBotaoOcultarSolicitacao();
+    //    $('[data-toggle="tooltip"]').tooltip();
+        // $("").html(linhasTable);
+         $("#tabelaCadastroDeProduto").fadeIn();
+         $("#formCadastroDeProduto").hide();
+
+         contarSolicitacoes(); 
+
 }
 
-//listar todas as solicitações em aberto no bd
-function listarSolicitacoes(status){
- var result=[];
+function contarSolicitacoes(){
+
             $.ajax({
                   type: 'POST',
                   dataType: 'json',
-                  url: "json-listarSolicitacoesAdm.php",
-                  data:"status="+status,
+                  url: "json-contarSolicitacoes.php",
+               //   data:"status="+status,
                   async: false,
                   beforeSend:function(){
                     showLoading(".msg","Aguarde.... Localizando dados da busca.");
                   },
                   success: function(json)
                   {
-                    result=json;
+                   $.each(json,function(key,val){
+                   
+                   var status = val.status;
+                      if(status==0){ //pendentes
+               
+                        $("#contadorSolicitacoesPendentes").html(val.total);
+                      }else if(status==1){
+                  
+                         $("#contadorSolicitacoesEmAndamento").html(val.total);
+                      }else if(status==2){
+                   
+                         $("#contadorSolicitacoesFinalizadas").html(val.total);
+                      }else if(status==3){
+              
+                         $("#contadorSolicitacoesRecusadas").html(val.total);
+                      }
+                   });
                   },
                   error: function(msg){
                       console.log(msg);
@@ -406,7 +440,7 @@ function listarSolicitacoes(status){
             }).done(function(){
                   hideLoading(".msg");
             });
- return result;
+
 }
 
 //buscar uma solicitação com base no seu id
@@ -464,18 +498,6 @@ function buscarProduto(codigo){
   return result; //retorna o json com o id correspondente
 }
 
-function contarSolicitacoesPorStatus(status){
-   var contador=0;
-   contador = listarSolicitacoes(status).length;
-   return contador;
-}
-
-function contarSolicitacoes(){
-    $('#contadorSolicitacoesPendentes').html(contarSolicitacoesPorStatus(0));
-    $('#contadorSolicitacoesEmAndamento').html(contarSolicitacoesPorStatus(1));
-    $('#contadorSolicitacoesFinalizadas').html(contarSolicitacoesPorStatus(2));
-    $('#contadorSolicitacoesRecusadas').html(contarSolicitacoesPorStatus(3));
-}
 function preencherFormProdutoPadrao(json){
     var codigo = $("#codigo");
     var descricao = $("#descricao");
@@ -490,7 +512,7 @@ function preencherFormProdutoPadrao(json){
        //PERCORRE O JSON RECEBIDO VIA PARAMETRO E PREENCHE O FORM PADRAO
 $.each(json,function(id,produto){
     codigoSolicitacao=produto.idsolicitacao;
-    descricao.val(produto.descricao);
+    descricao.val(produto.descricao+" "+produto.referencia+" "+produto.marca);
     complemento1.val(produto.complemento1);
     complemento2.val(produto.complemento2);
     codigoNcm.val(produto.ncm);
@@ -582,21 +604,67 @@ function ativarBotaoEditar(){
   $(".btEditarSolicitacao").on("click",function(){
         var idSolicitacao=$(this).attr("idSolicitacao");
         var produto = buscarProduto(idSolicitacao);
-
-        preencherFormProdutoPadraoBuscar(produto);
+        if(produto.descricao==""){
+          produto = filtrarSolicitacao(idSolicitacao);
+          preencherFormProdutoPadrao(produto);
+        }else{
+          preencherFormProdutoPadraoBuscar(produto);
+        }
         criarBotaoIndividualEmpresas();
         
         $("#modalNovoProduto").modal();
         $("#codSolicitacao").val(idSolicitacao);
+        hideLoading(".msg");
   });
 }
  
 function ativarBotaoDesativarSolicitacao(){
     $(".btDesativarSolicitacao").on("click",function(){
           var id = $(this).attr("idSolicitacao");
-          confirm("deseja realmente remover essa solicitação?");
+          $("#idsolicitacao").val(id); //definindo o id da solicitacao no modal
+          $("#modalRecusarSolicitacao").modal();
     });
 }
+
+function ativarBotaoOcultarSolicitacao(){
+  $(".btOcultarSolicitacao").on("click",function(){
+    alterarStatus("statusSolicitacao",$(this).attr("idSolicitacao"),4);
+    exibirSolicitacoesDoUsuario(statusSolicitacaoTimeOut);
+  });
+}
+$("#btRecusarSolicitacao").on("click",function(){
+
+  var dadosFormsol = $("#formRecusarSolicitacao").serialize();
+ 
+  $.ajax({
+                  type:"POST",
+                  dataType:"json",
+                  url:"acao-Produto.php",
+                  data:dadosFormsol,
+                  async: true,
+                  beforeSend:function(){
+                    showLoading(".msg","Aguarde...");
+                  },
+                  success:function(json)
+                  {               
+
+
+                  },
+                  error: function(msg){
+                    $.each(msg,function(id,val){
+                      console.log("ERRO:");
+                      console.log(val);
+                    });
+                    
+                  }
+            }).done(function(){
+                hideLoading(".msg");
+                $('#modalRecusarSolicitacao').modal("hide");
+                exibirSolicitacoesDoUsuario(0);
+
+            });
+    
+});
 
 $("#botaoExibirEmpresasReplicacao").on("click",function(){
           atualizarDadosDoProduto();
@@ -673,7 +741,7 @@ function preencherDetalhesProdutoExistente(json){
 function criarBotaoIndividualEmpresas(){
     var html="<div class='btn-group'>";
     $.each(listarTodasEmpresas(),function(key,valor){
-      html+="<button type='button' empresa-id="+valor.id+" class='btn btn-info btIndividualEmpresa' nomeEmpresa="+valor.nome+"><span class='glyphicon glyphicon-exclamation-sign'> "+valor.nome+"</button>";
+      html+="<button type='button' empresa-id="+valor.id+" class='btn btn-info btIndividualEmpresa' nomeEmpresa="+valor.nome+"><center><span class='glyphicon glyphicon-exclamation-sign'></span><br>"+valor.nome+"</center></button>";
     });
     html+="</div>";
     $("#botaoIndividualDeEmpresas").html(html);
@@ -763,9 +831,14 @@ $("#btBuscarNcm").click(function(){
 //FORMULARIO CAD. PRODUTOS
 //preencher o campo descrição ao digitar algo no campo de ncm
 $('#codigoNcm').on("keyup",function(){
+
    var valorBusca = $(this).val();
         if(valorBusca==""){return};
+      clearInterval(interval);
+      interval = window.setTimeout(function() {
         preencherCampoAoDigitarNcm(valorBusca);
+      }, 600);
+       
  });
 
 
@@ -782,19 +855,16 @@ function preencherCampoAoDigitarNcm(codNcm){
 //ativar o campo dentro da tela de pesquisa do ncm
 function ativarCampoPesquisaNcm(){
   $("#inputPesquisaNcm").on("keyup",function(ev){
-      
-
-  var jsonNcm = buscarNcm($(this).val());
-  clearInterval(interval);
     showLoading(".ncm.msg","aguarde...");
-    var interval = window.setTimeout(function() {
+    clearInterval(interval);
+    interval = window.setTimeout(function() {
+    var jsonNcm = buscarNcm($("#inputPesquisaNcm").val());
          preencherTabelaNcm(jsonNcm);
       }, 600);
   });
 }
 
 function preencherTabelaNcm(json){
-
   var tabelaNcm = $(".corpoTabelaNcm");
   var html="";
 

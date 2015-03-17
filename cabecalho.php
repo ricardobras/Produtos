@@ -1,4 +1,5 @@
 <?php require_once("verifica-login.php"); ?>
+<?php $versao=1.1 ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,20 +7,19 @@
 	
 <meta charset="utf-8">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css?<?=$versao?>">
+
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/normalize.css"> 
- <link rel="stylesheet" href="css/botoes.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css?<?=$versao?>">
+	<link rel="stylesheet" href="../css/normalize.css?<?=$versao?>"> 
+ 	<link rel="stylesheet" href="css/botoes.css?<?=$versao?>">
 
-	<script src="js/jquery-2.1.3.min.js"></script>
-
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="js/moment.js"></script>
-	<script src="js/scripts-solicitacao.js"></script>
-	<script src="js/jquery.inputmask.js"></script>
-	<script src="js/formatarInput.js"></script>
+	<script src="js/jquery-2.1.3.min.js?<?=$versao?>">		 </script>		
+	<script src="bootstrap/js/bootstrap.min.js?<?=$versao?>"></script>
+	<script src="js/moment.js?<?=$versao?>">				 </script>
+	<script src="js/scripts-solicitacao.js?<?=$versao?>">	 </script>
+	<script src="js/jquery.inputmask.js?<?=$versao?>">		 </script>
+	<script src="js/formatarInput.js?<?=$versao?>">			 </script>
 
 	
 	

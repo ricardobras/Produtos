@@ -1,7 +1,7 @@
 <?php require_once 'PHPMailer-master/PHPMailerAutoload.php';
 
 
-function enviarEmail($nome,$destinatario,$mensagem){
+function enviarEmail($nome,$destinatario,$mensagem,$assunto){
 $mail = new PHPMailer;
 
 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
@@ -28,7 +28,7 @@ $mail->addAddress($destinatario, $nome);     // Add a recipient
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = 'Solicitação de Cadastro';
+$mail->Subject = $assunto;
 $mail->Body    = $mensagem;
 
 

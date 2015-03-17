@@ -1,13 +1,13 @@
-<?php include("_inc/config.php");
+<?php include("../_inc/config.php");
 
 
-$empresa 	= $_POST['empresa'];
-$nome 		= $_POST['nome'];
-$setor		= $_POST['setor'];
-$ramal		= $_POST['ramal'];
-$email 		= $_POST['email'];
-$login 		= $_POST['login'];
-$senha 		= md5($_POST['senha']);
+$empresa = $_POST['empresa'];
+$nome = $_POST['nome'];
+$setor = $_POST['setor'];
+$ramal = $_POST['ramal'];
+$email = $_POST['email'];
+$login = $_POST['login'];
+$senha = md5($_POST['senha']);
 $nivelAcesso=$_POST['nivelAcesso'];
 
 $sqlValidarEmail = "SELECT * FROM usuario WHERE email='{$email}'";

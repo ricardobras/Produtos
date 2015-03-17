@@ -35,7 +35,7 @@ if(mysqli_query($conexao,$sqlInsert)){
 			enviarEmail($nomeUsCadastro,$emailUsCadastro,"<span style='text-transform: uppercase;'>o Usuário: <b> '{$nomeUsuarioLogado}'</b><br>Acaba de solicitar o cadastramento do produto <b>'{$descricao}'</b> utilizando a plataforma WEB <br>Grau de Importância: <b>'{$importancia}'</b> <br>Data da Solicitação:'{$data}'</span>");
 		}
 		//enviar e-mail para o proprio usuário que solicitou o cadastro
-		enviarEmail($nomeUsuarioLogado,$emailUsuarioLogado,"<span style='text-transform: uppercase;'>o Usuário: <b> '{$nomeUsuarioLogado}'</b><br>Acaba de solicitar o cadastramento do produto <b>'{$descricao}'</b> utilizando a plataforma WEB <br>Grau de Importância: <b>'{$importancia}'</b> <br>Data da Solicitação:'{$data}'</span>");
+		enviarEmail($nomeUsuarioLogado,$emailUsuarioLogado,"<span style='text-transform: uppercase;'>o Usuário: <b> '{$nomeUsuarioLogado}'</b><br>Acaba de solicitar o cadastramento do produto <b>'{$descricao}'</b> utilizando a plataforma WEB <br>Grau de Importância: <b>'{$importancia}'</b> <br>Data da Solicitação:'{$data}'</span>","Nova solicitação de cadastro");
 	}
 	array_push($arrayJson,array("retorno"=>"true","msg"=>"Solicitação realizada com sucesso!\n Aguarde o retorno da equipe de cadastro!"));
 }else{

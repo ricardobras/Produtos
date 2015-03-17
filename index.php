@@ -39,7 +39,7 @@
 
 	
 
-<!-- Modal cadastro de usuario -->
+<!-- Modal solicitação -->
 <div class="modal fade" id="modalSolicitacaoCadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -51,6 +51,7 @@
     
   <form id="formSolicitacao" class="form-horizontal">
  
+<b class="fontRed">Itens marcados com  ( * asterisco), são obrigatórios!</b>
       	<table>
       	<thead>
 	      	<tr>
@@ -61,7 +62,7 @@
 		      	<th></th>
 	      	</tr>
       	</thead><tbody>
-      	<tr><td><label for="empresa">Empresa:</label></td></tr>
+      	<tr><td><label for="empresa">Empresa: <b class="fontRed">*</b></label></td></tr>
       	<tr>
       	<td colspan="5">
     
@@ -74,11 +75,11 @@
       		<tr>
       		
       			<td colspan="3" style="width:350px">
-      				<label for="descricao">Descrição </label>
+      				<label for="descricao">Descrição <b class="fontRed">*</b></label>
       			</td>
 
       			<td>
-      				<label for="und">UND</label>
+      				<label for="und">UND <b class="fontRed">*</b></label>
       			</td>
       		</tr>
       		<tr>
@@ -91,18 +92,18 @@
   
       		</tr>
       		<tr>
-      			<td><label for="referencia">Referência</label></td><td colspan="2"><label for="marca">Marca </label></td>
+      			<td><label for="referencia">Referência <b class="fontRed">*</b></label></td><td colspan="2"><label for="marca">Marca </label></td>
       		</tr>
       		<tr>
       			<td>
 		      		<input type="text" id="referencia" name="referencia" placeHolder="" class="form-control input-sm" >
       			</td>
       			<td colspan="2" >
-		      		<input type="text" style="width:100%" id="marca" name="marca" placeHolder="" class="form-control input-sm" >
+		      		<input type="text" style="width:100%" id="marca" name="marca" placeHolder="" class="form-control input-sm" value=" " >
       			</td>
       		</tr>
       		      		<tr>
-      			<td><label for="ccusto">C.Custo</label></td><td><label for="grupo">Grupo</label></td>
+      			<td><label for="ccusto">C.Custo <b class="fontRed">*</b></label></td><td><label for="grupo">Grupo <b class="fontRed">*</b></label></td>
       		</tr>
       		<tr>
       			<td>
@@ -113,7 +114,7 @@
       			</td>
       		</tr>
       		<tr>
-      			<td><label for="ordproducao">Ord. Produção</label></td><td><label for="aplicacao">Aplicação</label></td>
+      			<td><label for="ordproducao">Ord. Produção <b class="fontRed">*</b></label></td><td><label for="aplicacao">Aplicação <b class="fontRed">*</b></label></td>
       		</tr>
       		<tr>
       		<td>

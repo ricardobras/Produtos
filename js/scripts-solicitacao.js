@@ -4,7 +4,7 @@ $(function() {
 
 //ação de cadastro
 		  $('[data-toggle="tooltip"]').tooltip();
-      exibirSolicitacoesDoUsuario("");
+      exibirSolicitacoesDoUsuario(" ");
 
       hideLoading(".msg");
       $(".btCancelar").on("click",function(){
@@ -231,12 +231,14 @@ function preencherTabela(json){
                 linhasTable+="<td><span class='badge  btn-danger statusCadastro' data-toggle='tooltip' data-placement='right' title='Prioridade Urgente'> </span></td>";
              }
 
-            if(valor.status==0){
+                  if(valor.status==0){
                     linhasTable+="<td><span class='glyphicon glyphicon-hourglass' style='color:orange' data-toggle='tooltip' data-placement='right' title='Aguardando Cadastro'></span></td>";
                  }else if(valor.status==1){
                     linhasTable+="<td><span class='glyphicon glyphicon-pencil' style='color:blue' data-toggle='tooltip' data-placement='right' title='Em Andamento'></span></td>";
                  }else if(valor.status==2){
                      linhasTable+="<td><span class='glyphicon glyphicon-ok' style='color:green' data-toggle='tooltip' data-placement='right' title='Cadastro Realizado'></span></td>";
+                 }else if(valor.status==3){
+                     linhasTable+="<td><span class='glyphicon glyphicon-thumbs-down' style='color:red' data-toggle='tooltip' data-placement='right' title='Cadastro Recusado: "+valor.comentario+"'></span></td>";
                  }
 
              var data=moment(valor.dt_solicitacao).format('DD/MM/YYYY hh:mm');

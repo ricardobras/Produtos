@@ -26,9 +26,9 @@
 	
 <body>
  
-<div class="panel panel-success" style="width:50%; padding:0px; display:block; margin:auto;">
+<div class="panel panel-success" style="width:30%; padding:0px; display:block; margin:auto;">
 <div class="panel-heading">
-    <h3 class="panel-title">PAINEL - ADMINISTRATIVO</h3>
+    <h3 class="panel-title">LOGIN ADMINISTRADOR</h3>
   </div>
   <div class="panel-body">
   

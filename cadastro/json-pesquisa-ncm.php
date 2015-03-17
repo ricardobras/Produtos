@@ -23,9 +23,9 @@ $valorBusca = $_POST["busca"];
  
 //VERIFICA OS DADOS PASSADOS VIA PARAMETRO POST E REALIZA O FILTRO CASO NECESSÁRIO
 	if($valorBusca=="todos"){
-		$sql1="SELECT * FROM ncm";
+		$sql1="SELECT * FROM ncm limit 300";
 		echo json_encode(executarSql($sql1));
 	}else{
-		$sql2="SELECT * FROM ncm WHERE codigo LIKE ('%{$valorBusca}%') OR descricao LIKE ('%{$valorBusca}%');";
+		$sql2="SELECT * FROM ncm WHERE codigo LIKE ('%{$valorBusca}%') OR descricao LIKE ('%{$valorBusca}%') limit 100";
 	 	echo json_encode(executarSql($sql2));
 	}

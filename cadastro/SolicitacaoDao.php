@@ -11,5 +11,14 @@ class SolicitacaoDao{
 		$connect->set("sql",$sql); 	//define o sql a ser executado
 		return $connect->execute(); //executa o sql
 	}
+	function recusarSolicitacao($idsolicitacao,$comentario){
+		$sql="INSERT INTO solicitacao_recusada (idSolicitacao,comentario) values('{$idsolicitacao}','{$comentario}');";
+		$connect = new connectBD();	//cria uma conexão
+		$connect->conectar(); 		//conecta ao bd
+		$connect->set("sql",$sql); 	//define o sql a ser executado
+		$this->updateStatus($idsolicitacao,3);
+		$connect->execute(); //executa o sql	
+
+	}
 
 }

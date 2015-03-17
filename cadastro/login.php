@@ -5,23 +5,18 @@
 	
 <meta charset="utf-8">
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-  
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.min.css">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="./js/jquery-2.1.3.min.js"></script>
-  <script src="./bootstrap/js/bootstrap.min.js"></script>
-  <script src="./js/scripts-solicitacao.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="../js/jquery-2.1.3.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+  <script src="../js/scripts-cadastro.js"></script>
 
-  <link rel="stylesheet" href="../css/login.css">
-
-
-
-	<link rel="stylesheet" href="css/MaterialDesign-Webfont-master/materialdesignicons.css">
-	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="../css/login.css">
 
 	<title>
 		Sistema de integração de Produtos - Centralizado
@@ -31,9 +26,9 @@
 	
 <body>
  
-<div class="panel panel-primary" style="width:50%; padding:0px; display:block; margin:auto;">
+<div class="panel panel-success" style="width:50%; padding:0px; display:block; margin:auto;">
 <div class="panel-heading">
-    <h3 class="panel-title">Solicitação para cadastro de produtos</h3>
+    <h3 class="panel-title">PAINEL - ADMINISTRATIVO</h3>
   </div>
   <div class="panel-body">
   
@@ -41,7 +36,7 @@
 
 <div id="login" class="login">
 <form  id="formLogin">
-	<div class="alert alert-info" role="alert">
+	<div class="text text-danger" role="alert">
 	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 	  <span class="sr-only">Error:</span>
    		Informe Seus dados para acesso 
@@ -54,7 +49,7 @@
  		  	<Label>Senha </label> <input type="password" name="senha" id="senha" class="form-control" placeholder="senha">
    		  <br>
    			<div class="input-group">
-    			<button type="submit" id="btLogin"  class="btn btn-primary btn-lg right"><span class="glyphicon glyphicon-lock"></span> Entrar  </button> 
+    			<button type="submit" id="btLogin"  class="btn btn-success btn-lg right"><span class="glyphicon glyphicon-lock"></span> Entrar  </button> 
     		</div>
 
 	 	</form>

@@ -13,27 +13,28 @@
 	<!-- <link rel="stylesheet" href="../css/normalize.css"> -->
 	<link rel="stylesheet" href="css/admin.css">
 
-
+<!-- ?=time()?> -->
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="../js/jquery-2.1.3.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.js"></script>
   	<script src="../js/moment.js"></script>
-  	<script src="../js/scripts-admin.js"></script>
+  	<script src="../js/scripts-cadastro.js?v=1.0"></script>
 	<script src="../js/jquery.inputmask.js"></script>
 	<script src="../js/formatarInput.js"></script>
 
 	<title>
-		ADMIN  Sistema de integração de Produtos - Centralizado
+		CADASTROS-Sistema de integração de Produtos - Centralizado
 	</title>
  
 </head>
 	
 <body>	
-<div class="page-header">
-  <nav class="navbar">
+
   <div class="container-fluid">
-  <h4>Cadastros</h4> <small>Gerenciar as opções de cadastros de Produtos de todo o sistema, Adicionar, Alterar, Excluir etc..</small>
-  		<div class="navbar-btn pull-right">
+  <h4><span class="label label-success">Cadastros</span></h4><h5>
+ <div class="navbar-btn pull-right">
+
+  		
   			<button id="btPesquisarProduto" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Pesquisar Produtos Cadastrados" data-placement="bottom">
 					 <span class="glyphicon glyphicon-file"></span>
 					  <span class="glyphicon glyphicon-search"></span>
@@ -49,7 +50,7 @@
   		</div>
  			<a href="../index.php" class="btn btn-sm btn-danger">Sair <span class="glyphicon glyphicon-log-out"></span></a>
  		</div>
+ 		<span>Gerenciar as opções de cadastros de Produtos de todo o sistema, Adicionar, Alterar, Excluir etc..</h5>
 	</div>
-	</nav>
-  </div>
+
  <div class="page-content">

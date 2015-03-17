@@ -84,11 +84,11 @@ legend{
 }
 .legenda.prioridades{
  
-	width: 350px;
+	width: 520px;
 	 
 	position: absolute;
 	float:right;
-	margin-left:65%;
+	margin-left:50%;
 	margin-right:100px;
 	margin-top:-60px;
 	height: 50px;
@@ -131,5 +131,8 @@ input, textarea, button, select, label, option, a{
  	height: 20px;
  	cursor: pointer;
   }
- 
+  
+ .fontRed{
+ 	color:red; font-size:9pt;
+ }
   

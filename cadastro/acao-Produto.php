@@ -1,12 +1,13 @@
-<?php date_default_timezone_set('America/Sao_Paulo');
+<?php 
 require_once("./Produto.php"); //INCLUINDO AS DEPENDENCIAS
 	  require_once("ProdutoDao.php"); 
  	  require_once("SolicitacaoDao.php");
  	  require_once("ProdutoDetalhes.php"); 
  	  require_once("ProdutoDetalhesDao.php"); 
+ 	  require_once("../acao-enviarEmail.php");
 //DEFINIR O LOCAL DO TIMEZONE ( BRASIL)
 
-
+date_default_timezone_set('America/Sao_Paulo');
  
 	 
 //VERIFICA O PARAMETRO RECEBIDO VIA WEB
@@ -19,6 +20,7 @@ $arrayJson=array();
 $usuarioCadastro = $_SESSION['UsuarioId']; 	
 
 if($acao=="gerarId"){
+	date_default_timezone_set('America/Sao_Paulo');
 	$daoProduto = new ProdutoDao();
 	$daoSolicitacao = new SolicitacaoDao();
 	//PEGA O NOME DO USUÁRIO LOGADO VIA SESSION
@@ -134,4 +136,23 @@ $daoSolicitacao = new SolicitacaoDao();
 	$daoProduto = new ProdutoDao();
 	$json= $daoProduto->buscar($valorBusca);
 	echo $json;
+}else if($acao=="recusarSolicitacao"){
+	$comentario=$_POST['comentario'];
+	$id=$_POST['idsolicitacao'];
+	$daoSolicitacao = new SolicitacaoDao();
+ 
+ 	$daoSolicitacao->recusarSolicitacao($id,$comentario);
+ 	$retorno = "ok";
+ 	$arrayJson=array();
+ 	array_push($arrayJson, array("retorno"=>$retorno)); 	
+ 	/*$msg="<span style='text-transform: uppercase;'>
+ 	o Usuário: <b> '{$nomeUsuarioLogado}'</b><br>
+ 	Acaba de solicitar o cadastramento do produto <b>'{$descricao}'</b> 
+ 	utilizando a plataforma WEB <br>
+ 	Grau de Importância: <b>'{$importancia}'</b> <br>
+ 	Data da Solicitação:'{$data}'</span>";*/
+
+ 	//enviarEmail($nomeUsuarioLogado,$emailUsuarioLogado,$msg,"Solicitação de cadastro [Recusada]");
+ 	echo json_encode($arrayJson);
+
 }

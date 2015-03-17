@@ -4,9 +4,12 @@
   <div class="well well-sm">
 		<table class="table table-striped table-responsive table-hover table-condensed"  >
 			<thead>
-				<tr>
+		<tr>
      	  <th> </th>
+     	  <th ></th>
           <th >Data</th>
+          <th >Cod.CHB</th>
+
 					<th>Emp.</th>
 					<th>Descrição</th>
 					<th>UND</th>
@@ -18,7 +21,7 @@
 					<th>Aplicação</th>
 					<th>Obs</th>
 					<th width="100px"></th>
-				</tr>
+			</tr>
 			</thead>
 			<tbody class="corpoTabela">
 			</tbody>

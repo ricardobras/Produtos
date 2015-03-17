@@ -10,7 +10,7 @@ if($modoExibicao=="todas"){
 //listar todas as solicitações vinculadas aquele usuário
 	  
 		
-		$sqlSelect = "SELECT * FROM solicitacao WHERE usuario_id='{$usuarioID}' AND status IN(0,1) ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
+		$sqlSelect = "SELECT * from solicitacao s left join solicitacao_recusada sr on sr.idSolicitacao = s.idsolicitacao WHERE s.usuario_id='{$usuarioID}' AND status IN(0,1) ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
 
 		$resultado=mysqli_query($conexao,$sqlSelect);
 
@@ -27,7 +27,7 @@ $jsonSolicitacao=array();
 
 //listar todas as solicitações vinculadas aquele usuário
 
-		$sqlSelectBusca = "SELECT * FROM solicitacao WHERE usuario_id='{$usuarioID}'  ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
+		$sqlSelectBusca = "SELECT * from solicitacao s left join solicitacao_recusada sr on sr.idSolicitacao = s.idsolicitacao WHERE s.usuario_id='{$usuarioID}'  ORDER BY status ASC, importancia DESC,dt_solicitacao ASC";
 
 		$resultadoBusca=mysqli_query($conexao,$sqlSelectBusca);
 
